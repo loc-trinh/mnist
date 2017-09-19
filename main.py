@@ -35,21 +35,3 @@ def get_data():
 
     return (X_train, Y_train, X_test, Y_test)
 
-
-def two_layers_NN():
-    from keras.models import Sequential
-    from keras.layers import Dense, Activation
-    from keras.utils.np_utils import to_categorical
-
-    X_train, Y_train, X_test, Y_test = get_data()
-
-    model = Sequential()
-    model.add(Dense(800, input_dim=784, activation='relu'))
-    model.add(Dense(10, activation='softmax'))
-    model.compile(loss='categorical_crossentropy',optimizer='adam',metrics=['accuracy'])
-    model.fit(X_train, to_categorical(Y_train), batch_size=100, nb_epoch=25, validation_split=.15)
-    score = model.evaluate(X_test, to_categorical(Y_test), verbose=0)
-    print('Loss:', score[0])
-    print('Accuracy:', score[1])
-
-two_layers_NN()
